@@ -30,8 +30,6 @@ export async function pollForTasks(): Promise<void> {
 
         const PORT = process.env.PORT || 3000
         const localEndpoint = `http://localhost:${PORT}${task.endpoint}`;
-        console.log("------- localEndpoint ", localEndpoint)
-        console.log("------- task ", task)
         let processResponse;
         
         // ✅ Dynamically handle different HTTP methods
@@ -48,11 +46,12 @@ export async function pollForTasks(): Promise<void> {
             case 'DELETE':
                 processResponse = await axios.delete(localEndpoint, { data: task.data });
                 break;
-            default:
-                throw new Error(`Unsupported HTTP method: ${task.method}`);
-        }
-        
-        const result = processResponse;
+                default:
+                    throw new Error(`Unsupported HTTP method: ${task.method}`);
+                }
+                
+        const result = processResponse.data;
+        console.log("------- result ", result)
 
         // Send the result back to the public server
         await axios.post(`${PUBLIC_SERVER}/complete`, { id: task.id, result });

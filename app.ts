@@ -71,7 +71,7 @@ app.post('/api/process', (req: Request, res: Response) => {
 });
 
 // Start polling
-// pollForTasks()
+pollForTasks()
 
 // Start server
 const PORT = process.env.PORT || 3000
