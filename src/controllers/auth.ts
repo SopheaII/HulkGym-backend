@@ -70,7 +70,12 @@ export const login = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "User not found" });
     }
     const token = generateToken({ id: user.id, role: user.role as RoleType });
-    return res.status(200).json({ message: "Login Successfully", token });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+    return res.status(200).json({ message: "Login Successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
