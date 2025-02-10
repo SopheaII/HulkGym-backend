@@ -1,3 +1,5 @@
+import { getAxiosInstance } from "../utils/axios"
+
 interface MessageObj {
     chat: {
         id: number
@@ -5,7 +7,14 @@ interface MessageObj {
     text?: string
 }
 
- 
+export function sendMessage(messageObj: MessageObj, messageText: string) {
+    return getAxiosInstance().get("SendMessage", {
+        chat_id: messageObj.chat.id,
+        text: messageText
+    })
+}
+
+
 export function handleMessage(messageObj: MessageObj) {
     const messageText = messageObj.text || ""
 

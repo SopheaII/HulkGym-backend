@@ -17,7 +17,8 @@ export const checkTelegramData = async (req: Request, res: Response) => {
   const userName = userInfo?.username || ""
   const userId = userInfo?.id || ""
   
-  console.log("------ ", initData == undefined)
+  console.log("------ ", initData)
+  console.log("------ ", userInfo)
   if (initData == undefined || !firstName || !userId || !userName) {
     return res.status(400).json({ success: false, message: 'Invalid data' });
   }

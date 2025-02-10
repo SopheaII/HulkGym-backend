@@ -14,7 +14,7 @@
   "dependencies": {
     "@nestjs/swagger": "^7.4.2",
     "@types/bcrypt": "^5.0.2",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "big.js": "^6.2.2",
     "class-transformer": "^0.5.1",
@@ -31,11 +31,10 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
-    "typeorm": "^0.3.20",
-    "zod": "^3.23.8",
-    "zod-to-openapi": "^0.2.1"
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "@types/big.js": "^6.2.2",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",

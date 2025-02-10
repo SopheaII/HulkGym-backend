@@ -12,6 +12,8 @@ import bodyParser from'body-parser';
 import activity from './src/routes/activity'
 import telegramBot from 'node-telegram-bot-api'
 import { handleMessage } from './src/service/telegram.service';
+import { Request, Response } from "express";
+import { pollForTasks } from './src/service/polling.service';
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = process.env.TELEGRAM_TOKEN || ""
@@ -50,6 +52,26 @@ bot.on('message', (msg) => {
   console.log("------ ", msg)
   bot.sendMessage(chatId, message);
 });
+
+
+app.post('/api/process', (req: Request, res: Response) => {
+  const data = req.body;
+  // Example processing logic; replace with your actual logic.]
+  console.log("--------- process", data)
+  const result = { processedData: data, message: 'Processed via Express in TypeScript.' }
+  res.status(200).json(result);
+});
+
+app.post('/api/process', (req: Request, res: Response) => {
+  const data = req.body;
+  // Example processing logic; replace with your actual logic.]
+  console.log("--------- process", data)
+  const result = { processedData: data, message: 'Processed via Express in TypeScript.' }
+  res.status(200).json(result);
+});
+
+// Start polling
+// pollForTasks()
 
 // Start server
 const PORT = process.env.PORT || 3000
