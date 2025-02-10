@@ -29,7 +29,7 @@ export async function pollForTasks(): Promise<void> {
         console.log('Received task:', task);
 
         const PORT = process.env.PORT || 3000
-        const localEndpoint = `http://localhost:${PORT}${task.endpoint}`;
+        const localEndpoint = `http://localhost:5173${task.endpoint}`;
         let processResponse;
         
         // ✅ Dynamically handle different HTTP methods
@@ -59,5 +59,5 @@ export async function pollForTasks(): Promise<void> {
         console.error('Error during polling or processing:', error.message);
     }
     // Continue polling
-    setTimeout(pollForTasks, 500);
+    setTimeout(pollForTasks, 1000);
 }

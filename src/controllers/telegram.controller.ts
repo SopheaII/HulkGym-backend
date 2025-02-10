@@ -34,6 +34,7 @@ export const checkTelegramData = async (req: Request, res: Response) => {
         return res.status(200).json({ message: "User authenticated.", token });
       }
 
+      
       const user = new UserInfo();
       user.name = firstName;
       user.userEmail = userId;
