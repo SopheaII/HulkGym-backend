@@ -53,13 +53,13 @@ bot.on("message", (msg) => {
 app.post('/api/process', (req: Request, res: Response) => {
   const data = req.body;
   // Example processing logic; replace with your actual logic.]
-  console.log("--------- process", data)
+  console.log("--------- process", req.query)
   const result = { processedData: data, message: 'Processed via Express in TypeScript.' }
   res.status(200).json(result);
 });
 
 // Start polling
-// pollForTasks()
+pollForTasks()
 
 // Start server
 const PORT = process.env.PORT || 3000;

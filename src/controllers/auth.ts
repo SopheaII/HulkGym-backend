@@ -7,33 +7,41 @@ import { RoleEnum, RoleType } from '../common';
 export const register = async (req: Request, res: Response) => {
   const userRepo = AppDataSource.getRepository(UserInfo);
   const { name, email, password } = req.body;
+  console.log("----------- 1", req.headers);
 
-  if (!name || !email || !password) {
-    return res.status(500).json({
-      message: "something wrong",
-    });
+  
+  try{
+    if (!name || !email || !password) {
+      return res.status(500).json({
+        message: "something wrong",
+      });
+    }
+    
+    const validUser = await userRepo.findOne({ where: { userEmail: email } });
+    if (validUser) {
+      return res.status(400).json({
+        message: "user already exist!",
+      });
+    }
+    
+    const hashPassword = await encryptPassword(password);
+    const user = new UserInfo();
+    user.name = name;
+    user.userEmail = email;
+    user.password = hashPassword;
+  
+    await userRepo.save(user);
+  
+    const token = generateToken({ id: user.id, role: RoleEnum[2] });
+  
+    return res
+      .status(200)
+      .json({ message: "User created successfully" });
+  } catch(error){
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 
-  const validUser = await userRepo.findOne({ where: { userEmail: email } });
-  if (validUser) {
-    return res.status(400).json({
-      message: "user already exist!",
-    });
-  }
-
-  const hashPassword = await encryptPassword(password);
-  const user = new UserInfo();
-  user.name = name;
-  user.userEmail = email;
-  user.password = hashPassword;
-
-  await userRepo.save(user);
-
-  const token = generateToken({ id: user.id, role: RoleEnum[2] });
-
-  return res
-    .status(200)
-    .json({ message: "User created successfully" });
 };
 
 export const login = async (req: Request, res: Response) => {
