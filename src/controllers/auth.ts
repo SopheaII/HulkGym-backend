@@ -7,7 +7,6 @@ import { RoleEnum, RoleType } from '../common';
 export const register = async (req: Request, res: Response) => {
   const userRepo = AppDataSource.getRepository(UserInfo);
   const { name, email, password } = req.body;
-  console.log("----------- 1", req.headers);
 
   
   try{

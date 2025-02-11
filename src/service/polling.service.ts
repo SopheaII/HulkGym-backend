@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const PUBLIC_SERVER = 'http://localhost:3001'; // Adjust this URL
-
+const PUBLIC_SERVER = process.env.PUBLIC_SERVER;
 interface Task {
     id: string;
     endpoint: string;
@@ -22,7 +21,7 @@ export async function pollForTasks(): Promise<void> {
             return;
         }
 
-        console.log('Received task:', task);
+        // console.log('Received task:', task);
 
         const PORT = process.env.PORT || 3000;
 
@@ -73,7 +72,7 @@ export async function pollForTasks(): Promise<void> {
             // ✅ Capture both the response status and data
             const result = processResponse.data   // Include response data
 
-            console.log("------- result ", result);
+            // console.log("------- result ", result);
 
             // ✅ Send both status and response data to the public server
             await axios.post(`${PUBLIC_SERVER}/complete`, { id: task.id, result });

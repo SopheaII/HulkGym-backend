@@ -49,15 +49,6 @@ bot.on("message", (msg) => {
   bot.sendMessage(chatId, message);
 });
 
-
-app.post('/api/process', (req: Request, res: Response) => {
-  const data = req.body;
-  // Example processing logic; replace with your actual logic.]
-  console.log("--------- process", req.query)
-  const result = { processedData: data, message: 'Processed via Express in TypeScript.' }
-  res.status(200).json(result);
-});
-
 // Start polling
 pollForTasks()
 
