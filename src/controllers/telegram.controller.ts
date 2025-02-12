@@ -10,6 +10,7 @@ import { encryptPassword, generateToken } from "../utils/encrypt";
 export const checkTelegramData = async (req: Request, res: Response) => {
   const userRepo = AppDataSource.getRepository(UserInfo);
   const { initData, userInfo } = req.body;
+  console.log("------ 1 ", initData)
   console.log("------ 1 ", userInfo)
   const { TELEGRAM_TOKEN } = process.env
 

@@ -7,6 +7,8 @@ import { UserInfo } from "../entity/user.entity";
 export const getActivity = async (req: Request, res: Response) => {
     const activityRepository = AppDataSource.getRepository(Activity);
     const userId = req.user?.id ?? ""
+    console.log("------- getActivity");
+    
 
     try {
         const activities = await activityRepository.find({

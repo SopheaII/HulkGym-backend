@@ -23,7 +23,8 @@ export async function pollForTasks(): Promise<void> {
 
         // console.log('Received task:', task);
 
-        const PORT = process.env.PORT || 3000;
+        // const PORT = process.env.PORT || 3000;
+        const PORT = 5173
 
         const localEndpoint = `http://localhost:${PORT}${task.endpoint}`;
         let processResponse;
